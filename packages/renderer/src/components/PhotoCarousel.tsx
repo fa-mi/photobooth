@@ -16,9 +16,9 @@ export function PhotoCarousel() {
           memo[index % 3].push({ photo, index: photos.length - 1 - index });
           return memo;
         },
-        new Array(MAX_PHOTOS).fill(null).map(() => [] as Array<{ photo: string; index: number }>)
+        new Array(MAX_PHOTOS).fill(null).map(() => [] as Array<{ photo: string; index: number }>),
       ),
-    [photos]
+    [photos],
   );
   const [sliceStart, setSliceStart] = React.useState(0);
 

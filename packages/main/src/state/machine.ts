@@ -148,7 +148,7 @@ export const machine = createMachine(
                   null,
                   null,
                   null,
-                  { key: 'back', type: 'CANCEL' },
+                  null,
                 ],
               }),
               'renderKeys',
@@ -393,11 +393,11 @@ export const machine = createMachine(
         if (!event.data || !event.filename) {
           throw new Error('No file to save');
         }
-        const buffer = new Buffer(event.data);
+        const buffer = Buffer.from(event.data);
         const localPath = path.join(context.mediaPath, event.filename);
         await mkdir(path.dirname(localPath), { recursive: true });
         await writeFile(localPath, buffer, 'binary');
       },
     },
-  }
+  },
 );

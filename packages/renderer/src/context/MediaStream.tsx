@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const MediaStreamContext = React.createContext<{
   videoId: string | null;
-  setVideoId: (id: string) => void;
+  setVideoId:(id: string) => void;
   audioId: string | null;
   setAudioId: (id: string) => void;
   stream: MediaStream | null;

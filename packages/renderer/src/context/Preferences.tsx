@@ -24,7 +24,7 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           for (const key of Object.keys(newState)) {
             draft[key as keyof Preferences] = newState[key as keyof Preferences];
           }
-        })
+        }),
       );
     });
 

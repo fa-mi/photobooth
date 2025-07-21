@@ -75,7 +75,7 @@ export function PhotoCapture({ status }: Props) {
             <div
               className={clsx(
                 'p-1 bg-white drop-shadow-2xl w-1/2 aspect-[16/10]',
-                transition(status, 'zoomRotate', Math.floor(Math.random() * 4))
+                transition(status, 'zoomRotate', Math.floor(Math.random() * 4)),
               )}
             >
               <canvas ref={canvas} className={clsx('w-full h-full', { 'opacity-0': !showLastPhoto })} />

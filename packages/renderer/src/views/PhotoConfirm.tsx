@@ -3,5 +3,5 @@ import type { Props } from './props';
 import { HelpCard } from '../components';
 
 export function PhotoConfirm({ status }: Props) {
-  return <HelpCard status={status} title="Say cheese!" description="Tap to begin taking photos." />;
+  return <HelpCard status={status} title="Say cheese!" description="Press the button to take photos." />;
 }

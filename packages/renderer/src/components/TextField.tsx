@@ -33,7 +33,7 @@ export function TextField({
       setFocused(true);
       onFocus && onFocus(event);
     },
-    [onFocus]
+    [onFocus],
   );
 
   const handleBlur = React.useCallback(
@@ -41,7 +41,7 @@ export function TextField({
       setFocused(false);
       onBlur && onBlur(event);
     },
-    [onBlur]
+    [onBlur],
   );
 
   const handleChange = React.useCallback(
@@ -50,7 +50,7 @@ export function TextField({
       setValue(value);
       onChangeText && onChangeText(value);
     },
-    [onChangeText, setValue]
+    [onChangeText, setValue],
   );
 
   React.useEffect(() => {

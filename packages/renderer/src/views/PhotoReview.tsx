@@ -13,6 +13,11 @@ export function PhotoReview({ status }: Props) {
   const [url] = usePreference('photoboothUrl');
   const index = useTransitionIndex();
 
+  const handleDone = () => {
+    localStorage.setItem('paymentStatus', 'unpaid');
+    window.location.reload(); // or navigate if using React Router
+  };
+
   return (
     <ReviewLayout
       card={
@@ -20,6 +25,14 @@ export function PhotoReview({ status }: Props) {
           <H2>Scan to download:</H2>
           <QrCode url={url} />
           <Text className="underline text-teal-700 text-4xl">{url}</Text>
+
+          <button
+            onClick={handleDone}
+            className="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg text-xl shadow-md transition-all"
+          >
+            Done
+          </button>
+          
         </>
       }
       status={status}

@@ -22,14 +22,14 @@ export function HelpCard({ description, keysWithoutDescription = true, status, t
 
   const rememberedKeys = React.useMemo(
     () => keys.filter((key) => key && (keysWithoutDescription || key.description)),
-    []
+    [],
   );
 
   return (
     <div
       className={clsx(
         'absolute top-0 left-0 w-screen h-screen p-12 overflow-hidden flex flex-col justify-end items-center',
-        status ? transition(status, 'slideUp') : undefined
+        status ? transition(status, 'slideUp') : undefined,
       )}
     >
       <Card blur className="min-w-[512px]">

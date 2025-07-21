@@ -45,7 +45,7 @@ export function PhotoSave({ status }: Props) {
           });
         },
         'image/jpeg',
-        1
+        1,
       );
     }
   }, [pathname, photos, photoType, actualCanvas]);
@@ -84,7 +84,7 @@ interface LayoutArgs {
 function drawImages(
   canvas: HTMLCanvasElement,
   photos: Array<ImageBitmap>,
-  layoutType: keyof typeof drawImage = 'quad'
+  layoutType: keyof typeof drawImage = 'quad',
 ) {
   const ctx = canvas.getContext('2d')!;
   const { width, height } = canvas;
@@ -119,7 +119,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
       halfPadding + (index % 2) * (cWidth / 2),
       halfPadding + (index < 2 ? 0 : cHeight / 2),
       cWidth / 2 - padding,
-      cHeight / 2 - padding
+      cHeight / 2 - padding,
     );
   },
   quadtych: ({ photo, cWidth, cHeight, index, ctx }: LayoutArgs) => {
@@ -135,7 +135,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
       halfPadding + (index % 4) * (cWidth / 4),
       halfPadding,
       cWidth / 4 - padding,
-      cHeight - padding
+      cHeight - padding,
     );
   },
   collage: ({ photo, cWidth, cHeight, index, ctx }: LayoutArgs) => {
@@ -170,7 +170,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
           cWidth / 2 + halfPadding,
           halfPadding,
           dWidth - padding,
-          dHeight - padding
+          dHeight - padding,
         );
         return;
       }
@@ -190,7 +190,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
           halfPadding,
           cHeight * 0.6 + halfPadding,
           dWidth - padding,
-          dHeight - padding
+          dHeight - padding,
         );
         return;
       }
@@ -212,7 +212,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
           dx + halfPadding,
           dy + halfPadding,
           dWidth - padding,
-          dHeight - padding
+          dHeight - padding,
         );
         return;
       }
