@@ -1,0 +1,27 @@
+{
+  "name": "@pb/main",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "dependencies": {
+    "@elgato-stream-deck/node": "^5.5.0",
+    "@pb/images": "workspace:packages/images",
+    "electron-store": "^8.0.2",
+    "electron-updater": "4.6.5",
+    "glob": "^8.0.3",
+    "node-fetch": "^3.2.6",
+    "qrcode": "^1.5.1",
+    "sharp": "^0.30.7",
+    "xstate": "^4.31.0"
+  },
+  "devDependencies": {
+    "@pb/webpack": "workspace:packages/webpack",
+    "@types/node": "^18.0.0",
+    "@types/qrcode": "^1",
+    "@types/sharp": "^0",
+    "@xstate/cli": "^0.1.7",
+    "electron-devtools-installer": "^3.2.0"
+  },
+  "scripts": {
+    "typegen": "xstate typegen 'src/**/*.ts'"
+  }
+}
