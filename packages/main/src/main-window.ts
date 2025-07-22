@@ -11,6 +11,7 @@ async function createWindow() {
     width: 1280,
     height: 800,
     frame: false,
+    fullscreen: true,
     webPreferences: {
       // nativeWindowOpen: true,
       // webviewTag: false, // The webview tag is not recommended. Consider alternatives like iframe or Electron's BrowserView. https://www.electronjs.org/docs/latest/api/webview-tag#warning

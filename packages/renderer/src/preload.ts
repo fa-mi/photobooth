@@ -18,7 +18,7 @@ contextBridge.exposeInMainWorld('api', {
     }
   },
 
-  printPhoto: (url: string) => ipcRenderer.send('print-photo', url),
+  printPhoto: (photoUrl: string) => ipcRenderer.send('print-photo', photoUrl),
 
   addListener: (channel: 'transition' | 'preferences', func: (data: unknown) => void) => {
     try {

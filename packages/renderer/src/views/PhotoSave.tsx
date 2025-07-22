@@ -67,7 +67,7 @@ export function PhotoSave({ status }: Props) {
       {pathname.endsWith('/saving') ? (
         <HelpCard title="Saving…" description={<ActivityIndicator />} status={status} />
       ) : (
-        <HelpCard title="Choose a layout" status={status} />
+        <HelpCard title="Great!" description="Your photo is ready." status={status} />
       )}
     </div>
   );

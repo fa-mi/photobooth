@@ -18,10 +18,10 @@ import PaymentPage from './views/PaymentPage';
 const RootApp = () => {
   const [paid, setPaid] = useState(() => localStorage.getItem('paymentStatus') === 'paid');
 
-  // console.log(paid);
-  // if (!paid) {
-  //   return <PaymentPage onPaymentSuccess={() => setPaid(true)} />;
-  // }
+  console.log(paid);
+  if (!paid) {
+    return <PaymentPage onPaymentSuccess={() => setPaid(true)} />;
+  }
 
   return <App />;
 };

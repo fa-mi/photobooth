@@ -157,7 +157,7 @@ export const machine = createMachine(
               CONFIRM: 'capturing',
               CANCEL: 'done',
             },
-            after: { [selectTimeoutMs]: 'done' },
+            // after: { [selectTimeoutMs]: 'done' },
           },
           capturing: {
             entry: [
@@ -177,12 +177,15 @@ export const machine = createMachine(
                 entry: [
                   assign({
                     keys: () => [
-                      { key: 'quad', type: 'SELECT' },
-                      { key: 'quadtych', type: 'SELECT' },
-                      { key: 'collage', type: 'SELECT' },
-                      { key: 'random', type: 'SELECT' },
+                      // { key: 'quad', type: 'SELECT' },
+                      // { key: 'quadtych', type: 'SELECT' },
+                      // { key: 'collage', type: 'SELECT' },
+                      // { key: 'random', type: 'SELECT' },
                       null,
-                      { key: 'done', type: 'DONE', description: 'Save your collage' },
+                      null,
+                      null,
+                      null,
+                      { key: 'done', type: 'DONE', description: 'Save your photo' },
                     ],
                   }),
                   'renderKeys',
@@ -206,7 +209,7 @@ export const machine = createMachine(
                     target: 'saving',
                   },
                 },
-                after: { [saveTimeoutMs]: 'saving' },
+                // after: { [saveTimeoutMs]: 'saving' },
               },
               saving: {
                 entry: [assign({ keys: blankKeys }), 'renderKeys'],
@@ -239,7 +242,7 @@ export const machine = createMachine(
           complete: {
             entry: [assign({ keys: [null, null, null, null, null, { key: 'done', type: 'DONE' }] }), 'renderKeys'],
             on: { DONE: 'done' },
-            after: { [reviewTimeoutMs]: 'done' },
+            // after: { [reviewTimeoutMs]: 'done' },
           },
           done: { type: 'final' },
         },

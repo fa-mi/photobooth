@@ -16,6 +16,7 @@ interface Send {
 export interface Api {
   addListener: Listen;
   send: Send;
+  printPhoto: (photoUrl: string) => void;
 }
 
 declare global {

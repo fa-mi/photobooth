@@ -20,7 +20,8 @@ export function PhotoReview({ status }: Props) {
 
   const handlePrint = () => {
     const lastPhoto = photos[photos.length - 1];
-    const photoUrl = `pb:${lastPhoto}`;
+    const photoUrl = `photo:${lastPhoto}`; // or file:// or data: depending on your actual path
+    console.log(photoUrl);
     window.api.printPhoto(photoUrl);
   };
 

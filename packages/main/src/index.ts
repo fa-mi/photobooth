@@ -1,5 +1,5 @@
-import { app, powerSaveBlocker, systemPreferences } from 'electron';
-import type { BrowserWindow } from 'electron';
+import { app, powerSaveBlocker, protocol, systemPreferences } from 'electron';
+import { BrowserWindow, ipcMain } from 'electron';
 import './security-restrictions';
 import { restoreOrCreateWindow } from './main-window';
 import { setup as setupState } from './state';
@@ -13,6 +13,33 @@ export type { TransitionData } from './state';
 let stopStateMachine: () => void;
 let store: Store;
 let keepAliveTimeout: NodeJS.Timeout;
+
+protocol.registerSchemesAsPrivileged([{ scheme: 'photo', privileges: { secure: true, standard: true } }]);
+
+ipcMain.on('print-photo', (event, photoUrl) => {
+  const printWindow = new BrowserWindow({
+    show: false,
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+
+  printWindow.loadURL(`data:text/html,
+    <html>
+      <body style="margin:0;padding:0;">
+        <img src="${photoUrl}" style="width:100%;height:auto;" />
+        <script>window.onload = () => { window.print(); }</script>
+      </body>
+    </html>`);
+
+  printWindow.webContents.on('did-finish-load', () => {
+    printWindow.webContents.print({ silent: true }, () => {
+      printWindow.close();
+    });
+  });
+});
+
 
 /**
  * Prevent multiple instances
