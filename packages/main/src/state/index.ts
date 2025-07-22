@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { BrowserWindow, ipcMain } from 'electron';
 import type { WebContents } from 'electron';
 import { interpret } from 'xstate';
 import type { InterpreterFrom } from 'xstate';
@@ -46,6 +46,35 @@ export async function setup(webContents: WebContents, store: Store) {
 
   ipcMain.on('transition', (event, action) => {
     service.send(action);
+  });
+
+  ipcMain.on('print-photo', (event, photoUrl) => {
+    const printWin = new BrowserWindow({
+      show: false,
+      webPreferences: {
+        contextIsolation: true,
+        nodeIntegration: false,
+      },
+    });
+  
+    printWin.loadURL(`data:text/html,
+      <html>
+        <body style="margin:0;padding:0;">
+          <img src="${photoUrl}" style="width:100%;height:auto;" />
+          <script>
+            window.onload = () => {
+              window.print();
+            };
+          </script>
+        </body>
+      </html>`);
+  
+    printWin.webContents.on('did-finish-load', () => {
+      printWin.webContents.print({ silent: true, printBackground: true }, (success, err) => {
+        if (!success) console.error('Print failed:', err);
+        printWin.close();
+      });
+    });
   });
 
   return {

@@ -18,21 +18,20 @@ export function PhotoReview({ status }: Props) {
     window.location.reload(); // or navigate if using React Router
   };
 
+  const handlePrint = () => {
+    const lastPhoto = photos[photos.length - 1];
+    const photoUrl = `pb:${lastPhoto}`;
+    window.api.printPhoto(photoUrl);
+  };
+
   return (
     <ReviewLayout
       card={
         <>
-          <H2>Scan to download:</H2>
-          <QrCode url={url} />
-          <Text className="underline text-teal-700 text-4xl">{url}</Text>
-
-          <button
-            onClick={handleDone}
-            className="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg text-xl shadow-md transition-all"
-          >
-            Done
-          </button>
-          
+          <div className="flex gap-4 justify-center mt-6">
+            <button onClick={handlePrint} className="mt-6 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg text-xl shadow-md transition-all">Print</button>
+            <button onClick={handleDone} className="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg text-xl shadow-md transition-all">Done</button>
+          </div>
         </>
       }
       status={status}

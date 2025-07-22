@@ -20,16 +20,16 @@ export function Main({ status }: Props) {
           </div>
 
           <div className={clsx('flex justify-around relative', transition(status, 'slideUp'))}>
-            <div className="absolute drop-shadow-lg aspect-square rounded-full text-white bg-lime-600 p-4 text-4xl overflow-hidden animate-ping">
-              ⬇
+            <div className="absolute drop-shadow-lg aspect-square rounded-full text-white bg-white p-4 text-4xl overflow-hidden animate-ping">
+              📷
             </div>
             <button
-              className="drop-shadow-lg aspect-square rounded-full text-white bg-lime-600 p-4 text-4xl overflow-hidden"
+              className="drop-shadow-lg aspect-square rounded-full text-white bg-white p-4 text-4xl overflow-hidden"
               onClick={() => {
                 window.api.send('transition', { type: 'TAKE_PHOTOS' });
               }}
             >
-              ⬇
+              📷
             </button>
           </div>
         </div>
