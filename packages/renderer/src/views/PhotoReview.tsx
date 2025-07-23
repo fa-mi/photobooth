@@ -15,7 +15,7 @@ export function PhotoReview({ status }: Props) {
 
   const handleDone = () => {
     localStorage.setItem('paymentStatus', 'unpaid');
-    window.location.reload(); // or navigate if using React Router
+    window.api.send('transition', { type: 'DONE' });
   };
 
   const handlePrint = () => {

@@ -111,8 +111,11 @@ export const machine = createMachine(
         ],
       },
       main: {
-        initial: 'normal',
+        initial: 'payment',
         states: {
+          payment: {
+            on: { PAID: 'normal' },
+          },
           normal: {
             entry: [assign({ keys: () => initialKeys, lastVideo: () => undefined }), 'renderKeys'],
           },
@@ -246,7 +249,7 @@ export const machine = createMachine(
           },
           done: { type: 'final' },
         },
-        onDone: 'main',
+        onDone: '#photobooth.main.payment',
       },
       video: {
         initial: 'confirming',

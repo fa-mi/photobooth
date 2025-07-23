@@ -51,9 +51,11 @@ const PaymentPage: React.FC<Props> = ({ onPaymentSuccess }) => {
   
       window.snap.pay(token, {
         onSuccess () {
+          console.log('Payment success');
           clearTimeout(id);
           localStorage.setItem('paymentStatus', 'paid');
           onPaymentSuccess();
+          window.api.send('transition', { type: 'PAID' });
         },
         onClose () {
           clearTimeout(id);
