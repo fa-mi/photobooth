@@ -16,14 +16,22 @@ import './index.css';
 import PaymentPage from './views/PaymentPage';
 
 const RootApp = () => {
-  const [paid, setPaid] = useState(false);
+  const [paid, setPaid] = useState(() => localStorage.getItem('paymentStatus') === 'paid');
 
   useEffect(() => {
-    const stored = localStorage.getItem('paymentStatus') === 'paid';
-    setPaid(stored);
+    const handleStorage = () => {
+      const status = localStorage.getItem('paymentStatus');
+      setPaid(status === 'paid');
+    };
+
+    window.addEventListener('storage', handleStorage);
+
+    // Optional: support internal manual trigger
+    window.__updatePaymentStatus = handleStorage;
+
+    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  console.log(paid);
   if (!paid) {
     return <PaymentPage onPaymentSuccess={() => {
       localStorage.setItem('paymentStatus', 'paid');

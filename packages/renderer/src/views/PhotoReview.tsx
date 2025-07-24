@@ -15,6 +15,14 @@ export function PhotoReview({ status }: Props) {
 
   const handleDone = () => {
     localStorage.setItem('paymentStatus', 'unpaid');
+    localStorage.removeItem('photoCount');
+  
+    // This will trigger UI to re-render PaymentPage
+    if (window.__updatePaymentStatus) {
+      window.__updatePaymentStatus();
+    }
+  
+    // Optionally: also reset machine to payment
     window.api.send('transition', { type: 'DONE' });
   };
 

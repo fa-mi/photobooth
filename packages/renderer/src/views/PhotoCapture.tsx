@@ -23,11 +23,12 @@ export function PhotoCapture({ status }: Props) {
       const ctx = canvas.current.getContext('2d')!;
       const { width, height } = canvas.current;
       const photo = photos[photos.length - 1];
+      const targetCount = Number(localStorage.getItem('photoCount') || '4');
       setShowLastPhoto(true);
       ctx.drawImage(photo, 0, 0, photo.width, photo.height, 0, 0, width, height);
       setTimeout(() => {
         setShowLastPhoto(false);
-        if (photos.length >= 4) {
+        if (photos.length >= targetCount) {
           window.api.send('transition', { type: 'DONE' });
         }
       }, 1500);
@@ -41,7 +42,7 @@ export function PhotoCapture({ status }: Props) {
   return (
     <>
       <div className="w-screen h-screen p-12 flex justify-end items-end">
-        {photos.length < 4 ? (
+        {photos.length < Number(localStorage.getItem('photoCount')) ? (
           <CountdownCircle
             key={taking ? photos.length - 1 : photos.length}
             duration={4}

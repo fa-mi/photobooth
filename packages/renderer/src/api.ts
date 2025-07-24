@@ -22,5 +22,6 @@ export interface Api {
 declare global {
   interface Window {
     api: Api;
+    __updatePaymentStatus?: () => void;
   }
 }

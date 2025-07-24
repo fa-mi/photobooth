@@ -5,6 +5,7 @@ import { transition } from '../modules';
 import type { Props } from './props';
 
 export function Main({ status }: Props) {
+  console.log(status);
   return (
     <>
       <div className={clsx('absolute inset-0 bg-slate-700/30 backdrop-blur-sm', transition(status, 'fade'))} />

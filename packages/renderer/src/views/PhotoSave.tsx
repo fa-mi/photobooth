@@ -24,13 +24,18 @@ export function PhotoSave({ status }: Props) {
 
   React.useEffect(() => {
     if (photos.length && canvas.current) {
-      drawImages(canvas.current, photos, photoType);
+      // drawImages(canvas.current, photos, photoType);
+      const layoutType = photos.length === 6 ? 'sixGrid' : photoType;
+      drawImages(canvas.current, photos, layoutType as keyof typeof drawImage);
     }
   }, [canvas, photos, photoType]);
 
   React.useEffect(() => {
     if (pathname.endsWith('/saving') && actualCanvas.current && photos.length) {
-      drawImages(actualCanvas.current, photos, photoType);
+      // drawImages(actualCanvas.current, photos, photoType);
+      const layoutType = photos.length === 6 ? 'sixGrid' : photoType;
+      drawImages(actualCanvas.current, photos, layoutType as keyof typeof drawImage);
+
       actualCanvas.current.toBlob(
         async (blob: Blob | null) => {
           if (!blob) {
@@ -106,6 +111,31 @@ function drawImages(
 }
 
 const drawImage: Record<string, (args: LayoutArgs) => void> = {
+  sixGrid: ({ photo, cWidth, cHeight, index, ctx }: LayoutArgs) => {
+    const cols = 3;
+    const rows = 2;
+    const { width: pWidth, height: pHeight } = photo;
+    const padding = Math.round(cWidth * photoPaddingRatio);
+    const halfPadding = padding / 2;
+  
+    const cellWidth = cWidth / cols;
+    const cellHeight = cHeight / rows;
+  
+    const dx = (index % cols) * cellWidth + halfPadding;
+    const dy = Math.floor(index / cols) * cellHeight + halfPadding;
+  
+    ctx.drawImage(
+      photo,
+      0,
+      0,
+      pWidth,
+      pHeight,
+      dx,
+      dy,
+      cellWidth - padding,
+      cellHeight - padding,
+    );
+  },  
   quad: ({ photo, cWidth, cHeight, index, ctx }: LayoutArgs) => {
     const { width: pWidth, height: pHeight } = photo;
     const padding = Math.round(cWidth * photoPaddingRatio);
@@ -250,6 +280,7 @@ const drawImage: Record<string, (args: LayoutArgs) => void> = {
 };
 
 const bgColors: Record<keyof typeof drawImage, () => string> = {
+  sixGrid: () => '#FFFFFF',
   quad: () => '#FFFFFF',
   quadtych: () => '#FFFFFF',
   collage: () => '#FFFFFF',

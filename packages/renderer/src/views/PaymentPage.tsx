@@ -23,6 +23,8 @@ const PaymentPage: React.FC<Props> = ({ onPaymentSuccess }) => {
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const handleSnapPay = async (amount: number) => {
+    const photoCount = amount === 1 ? 6 : 12;
+    localStorage.setItem('photoCount', photoCount.toString());
     try {
       const response = await fetch('http://localhost:8181/midtrans/create', {
         method: 'POST',
@@ -98,7 +100,7 @@ const PaymentPage: React.FC<Props> = ({ onPaymentSuccess }) => {
   
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <button
-            onClick={() => handleSnapPay(1)}
+            onClick={() => handleSnapPay(2)}
             className="bg-blue-500 hover:bg-blue-600 transition-all duration-200 text-white font-semibold py-4 rounded-xl text-2xl shadow-md"
           >
             100K - 8 photos
